@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Chị Linh Lời Chúc Ngủ Ngon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Cài đặt chung --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #00001a;
+            color: #fff;
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* --- Nền trời sao --- */
+        .night-sky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* --- Container chính --- */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5em;
+            margin: 0;
+            color: #ffdfa0;
+            text-shadow: 0 0 15px #ffdfa0;
+        }
+        
+        p {
+            font-size: 1.1em;
+            margin-top: 10px;
+            max-width: 600px;
+        }
+
+        /* --- Khu vực các ngôi sao tương tác --- */
+        .interactive-stars {
+            margin-top: 40px;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .interactive-star {
+            display: inline-block;
+            font-size: 3em;
+            color: #fff;
+            margin: 0 20px;
+            cursor: pointer;
+            transition: transform 0.3s, color 0.3s;
+            position: relative;
+        }
+
+        .interactive-star:hover {
+            transform: scale(1.5);
+            color: #ffee9b;
+        }
+
+        /* --- Hộp thông điệp --- */
+        .message-box {
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 0.8em; /* <<<< ĐÃ CHỈNH NHỎ LẠI */
+            width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s, visibility 0.4s;
+            pointer-events: none;
+        }
+
+        .message-box.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* --- Phần chân trang --- */
+        .footer {
+            margin-top: 40px;
+            font-size: 1.1em;
+            color: #aaa;
+            opacity: 0;
+            animation: fadeInFooter 3s 2s ease-in-out forwards;
+        }
+        
+        @keyframes fadeInFooter {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* CSS cho màn hình điện thoại */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.8em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .interactive-star {
+                font-size: 2.5em;
+                margin: 0 10px;
+            }
+            .message-box {
+                width: 180px;
+                font-size: 0.75em; /* <<<< ĐÃ CHỈNH NHỎ LẠI CHO ĐIỆN THOẠI */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="night-sky" id="night-sky"></div>
+
+    <div class="container">
+        <div class="content">
+            <h1>HíChị Linh,</h1>
+            <p>Sau một ngày dài, đã đến lúc gác lại mọi bộn bề. Chị bấm vô mấy ngôi sao iii</p>
+        </div>
+
+        <div class="interactive-stars">
+            <div class="interactive-star">★<div class="message-box">Chúc chị có một giấc mơ thật đẹp</div></div>
+            <div class="interactive-star">★<div class="message-box">Chị ngủ ngonnn nhéee</div></div>
+            <div class="interactive-star">★<div class="message-box">Reatrei suo sdei, sopén laʼ</div></div>
+        </div>
+
+        <div class="footer">
+            <p>Ngôi sao cuối em search mạng :> </p>
+        </div>
+    </div>
+
+    <script>
+        // --- JavaScript để tạo sao ngẫu nhiên ---
+        const nightSky = document.getElementById('night-sky');
+        const numberOfStars = 150;
+        for (let i = 0; i < numberOfStars; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            let size = Math.random() * 3;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            nightSky.appendChild(star);
+        }
+
+        // --- JavaScript để xử lý CLICK ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.interactive-star');
+
+            stars.forEach(star => {
+                star.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    
+                    const currentMessageBox = this.querySelector('.message-box');
+                    const isVisible = currentMessageBox.classList.contains('show');
+
+                    document.querySelectorAll('.message-box').forEach(box => {
+                        box.classList.remove('show');
+                    });
+
+                    if (!isVisible) {
+                        currentMessageBox.classList.add('show');
+                    }
+                });
+            });
+
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.message-box').forEach(box => {
+                    box.classList.remove('show');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
